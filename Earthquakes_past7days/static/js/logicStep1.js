@@ -121,7 +121,7 @@ L.control.layers(baseMaps).addTo(map);
 //let torontoData = "https://raw.githubusercontent.com/ChiefMetDing/Mapping_Earthquakes/main/torontoRoutes.json";
 
 // Accessing the Toronto neighborboods GeoJSON URL.
-let torontoHoods = "https://raw.githubusercontent.com/ChiefMetDing/Mapping_Earthquakes/main/torontoNeighborhoods.json"
+//let torontoHoods = "https://raw.githubusercontent.com/ChiefMetDing/Mapping_Earthquakes/main/torontoNeighborhoods.json"
 
 let myStyle = {
     color:"blue",
