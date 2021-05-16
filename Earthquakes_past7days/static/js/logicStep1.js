@@ -99,12 +99,12 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
 // Create a base layer that holds both maps.
 let baseMaps = {
     "Street": streets,
-    "Satellite Streets": satelliteStreets
+    "Satellite": satelliteStreets
 }
 
 let map = L.map("mapid",{
-    center:[43.7,-79.3],
-    zoom:11,
+    center:[39.5, -98.5],
+    zoom:3,
     layers:[streets]
 })
 
@@ -130,21 +130,21 @@ let myStyle = {
 }
 
 // Grabbing our GeoJSON data
-d3.json(torontoHoods).then(function(data){
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data){
     console.log(data);
     // Creating a GeoJSON layer with the retrieved data.
-    //L.geoJSON(data).addTo(map)
-    L.geoJSON(data,{
-                // pointToLayer method
-                // pointToLayer:function(feature,latlng){
-                //     return L.marker(latlng).bindPopup("<h2>City: " + feature.properties.city + "</h2><hr><h3>Airport: " + feature.properties.name + "</h3>")
-                // }
-                // onEachFeature method
-                onEachFeature:function(feature,layer){
-                    layer.bindPopup("<h2>Area Name: " + feature.properties.AREA_NAME + "</h2><hr><h3>Area S CD: " + feature.properties.AREA_S_CD + "</h3>");
-                },
-                style: myStyle
-            }).addTo(map)
+    L.geoJSON(data).addTo(map)
+    // L.geoJSON(data,{
+    //             // pointToLayer method
+    //             // pointToLayer:function(feature,latlng){
+    //             //     return L.marker(latlng).bindPopup("<h2>City: " + feature.properties.city + "</h2><hr><h3>Airport: " + feature.properties.name + "</h3>")
+    //             // }
+    //             // onEachFeature method
+    //             onEachFeature:function(feature,layer){
+    //                 layer.bindPopup("<h2>Area Name: " + feature.properties.AREA_NAME + "</h2><hr><h3>Area S CD: " + feature.properties.AREA_S_CD + "</h3>");
+    //             },
+    //             style: myStyle
+    //         }).addTo(map)
 })
 
 // Grabbing our GeoJSON data
