@@ -2,7 +2,8 @@
 console.log("working");
 
 // Create the map object with a center and zoom level.
-let map = L.map('mapid').setView([30,30],2);
+// let map = L.map('mapid').setView([30,30],2);
+
 
 // L.circleMarker([34.0522,-118.2437],{
 //     radius:300,
@@ -72,7 +73,7 @@ let map = L.map('mapid').setView([30,30],2);
 // })
 
 // We create the tile layer that will be the background of our map.
-let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}',
+let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}',
             //style options:
             //mapbox/streets-v11
             //mapbox/outdoors-v11
@@ -88,8 +89,29 @@ let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tile
             accessToken: API_KEY
         });
 
-streets.addTo(map);
+// We create the dark view tile layer that will be an option for our map.
+let dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', 
+        {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            accessToken: API_KEY
+        });
+// Create a base layer that holds both maps.
+let baseMaps = {
+    Street: streets,
+    Dark: dark
+}
 
+let map = L.map("mapid",{
+    center:[30,30],
+    zoom:2,
+    layers:[streets]
+})
+
+// Pass our map layers into our layers control and add layers control to the map.
+L.control.layers(baseMaps).addTo(map);
+
+// streets.addTo(map);
 // Then we add our 'graymap' tile layer to the map.
 
 // Accessing the airport GeoJSON URL
